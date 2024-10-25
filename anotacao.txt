@@ -1,0 +1,21 @@
+(blank=True, null=True) # vc quer que campo blank seja em branco = True
+(blank=True, null=True) # vc quer que campo null seja  nulo = True
+created_at = models.DateTimeField(auto_now_add=True) # armazena data e hora, e o django criara isso automaticamente
+
+
+
+def cars_request(request):
+    search = request.GET.get('search') # usuario esta mandando um parametro chamado search
+    cars = Car.objects.filter(model__contains=search) # busca pelo modelo do carro
+    return render(request, 'car/request.html', {'cars': cars})
+
+# --> http://127.0.0.1:8000/cars/request/?search=uno
+
+
+base.html fica dentro da pasta projeto, onde esta o projeto django...
+o restante fica no cars, que é o nosso app
+
+
+vai ordernar por ordem decrescente
+class Meta:
+        ordering = ['-created_at']
